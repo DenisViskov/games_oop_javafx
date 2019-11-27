@@ -6,11 +6,11 @@ import ru.job4j.puzzle.firuges.Figure;
 import java.util.Arrays;
 
 /**
- * //TODO add comments.
+ * Class realize game "Sokoban"
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
- * @version $Id$
- * @since 0.1
+ * @author Denis Viskov (DenisViskov16@gmail.com)
+ * @version 1.1
+ * @since 27.11.19
  */
 public class Logic {
     private final int size;
@@ -77,25 +77,22 @@ public class Logic {
         for (int row = 0; row < table.length; row++) {
             for (int cell = 0; cell < table.length; cell++) {
                 if (table[row][cell] == sign) {
-                    for (int i = 0; i < table.length; i++) {
-                        if (table[row][i] == sign) {
-                            rowX++;
-                        }
-                        if (table[i][cell] == sign) {
-                            cellX++;
-                        }
-                        if (rowX == table.length || cellX == table.length) {
-                            result = true;
-                            break;
-                        }
-                    }
-                    rowX = 0;
-                    cellX = 0;
+                    rowX++;
+                }
+                if (table[cell][row] == sign) {
+                    cellX++;
+                }
+                if (rowX == table.length || cellX == table.length) {
+                    result = true;
+                    return result;
                 }
             }
+            rowX = 0;
+            cellX = 0;
         }
         return result;
     }
+
 
     public int[][] convert() {
         int[][] table = new int[this.size][this.size];

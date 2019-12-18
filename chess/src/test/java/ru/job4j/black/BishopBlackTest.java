@@ -32,4 +32,22 @@ public class BishopBlackTest {
         };
         Assert.assertEquals(expected, out);
     }
+
+    @Test
+    public void isDiagonalTrueTest() {
+        Cell source = Cell.C1;
+        Cell dest = Cell.G5;
+        boolean expected = true;
+        boolean out = new BishopBlack(Cell.A1).isDiagonal(source, dest);
+        Assert.assertTrue(out);
+    }
+
+    @Test
+    public void isDiagonalFalseTest() {
+        Cell source = Cell.C1;
+        Cell dest = Cell.G7;
+        boolean expected = true;
+        boolean out = new BishopBlack(Cell.A1).isDiagonal(source, dest);
+        Assert.assertFalse(out);
+    }
 }

@@ -39,11 +39,11 @@ public class BishopBlack implements Figure {
      */
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        /*if (!isDiagonal(source, dest)) {
+        if (!isDiagonal(source, dest)) {
             throw new IllegalStateException(
                     String.format("Could not way by diagonal from %s to %s", source, dest)
             );
-        }*/
+        }
         int size = dest.y - source.y;
         Cell[] steps = new Cell[size];
         for (int index = 0; index < size; index++) {
@@ -76,6 +76,8 @@ public class BishopBlack implements Figure {
                     break;
                 }
                 result = compare.equals(dest) ? true : false;
+            } else {
+                break;
             }
         }
         return result;
@@ -100,8 +102,8 @@ public class BishopBlack implements Figure {
      * @return - строку Right или Left
      */
     private String turnMove(Cell source, Cell dest) {
-        String upRight = dest.x > source.x && dest.y > source.y ? "Right" : "false";
-        String upLeft = dest.x < source.x && dest.y > source.y ? "Left" : "false";
+        String upRight = dest.x > source.x && dest.y < source.y ? "Right" : "false";
+        String upLeft = dest.x < source.x && dest.y < source.y ? "Left" : "false";
         return upRight.equals("Right") ? upRight : upLeft;
     }
 
@@ -120,7 +122,7 @@ public class BishopBlack implements Figure {
         int y = source.y;
         if (this.turnMove(source, dest).equals("Right")) {
             x += deltaX;
-            y += deltaY;
+            y -= deltaY;
             result = Cell.findBy(x, y);
         } else if (this.turnMove(source, dest).equals("Left")) {
             x -= deltaX;

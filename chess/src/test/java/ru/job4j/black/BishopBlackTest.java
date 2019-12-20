@@ -31,7 +31,7 @@ public class BishopBlackTest {
         BishopBlack bishopBlack = new BishopBlack(Cell.C1);
         Cell[] out = bishopBlack.way(Cell.D8, Cell.G5);
         Cell[] expected = new Cell[]{
-                Cell.D7, Cell.E6, Cell.F6, Cell.G5
+                Cell.E7, Cell.F6, Cell.G5
         };
         Assert.assertEquals(expected, out);
     }

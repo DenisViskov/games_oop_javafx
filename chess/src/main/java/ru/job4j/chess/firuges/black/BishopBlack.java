@@ -44,7 +44,7 @@ public class BishopBlack implements Figure {
                     String.format("Could not way by diagonal from %s to %s", source, dest)
             );
         }
-        int size = dest.y - source.y;
+        int size = source.y - dest.y;
         Cell[] steps = new Cell[size];
         for (int index = 0; index < size; index++) {
             steps[index] = index == 0 ? this.searchPosition(source, dest) : this.searchPosition(steps[index - 1], dest);
@@ -126,7 +126,7 @@ public class BishopBlack implements Figure {
             result = Cell.findBy(x, y);
         } else if (this.turnMove(source, dest).equals("Left")) {
             x -= deltaX;
-            y += deltaY;
+            y -= deltaY;
             result = Cell.findBy(x, y);
         }
         return result;

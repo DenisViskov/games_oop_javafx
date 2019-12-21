@@ -46,8 +46,9 @@ public class BishopBlack implements Figure {
         }
         int size = source.y - dest.y;
         Cell[] steps = new Cell[size];
-        for (int index = 0; index < size; index++) {
-            steps[index] = index == 0 ? this.searchPosition(source, dest) : this.searchPosition(steps[index - 1], dest);
+        steps[0] = this.searchPosition(source, dest);
+        for (int index = 1; index < size; index++) {
+            steps[index] = this.searchPosition(steps[index - 1], dest);
         }
         return steps;
     }
@@ -60,27 +61,9 @@ public class BishopBlack implements Figure {
      * @return - true или false
      */
     public boolean isDiagonal(Cell source, Cell dest) {
-        boolean result = false;
-        String turn = this.turnMove(source, dest);
-        Cell compare = source;
-        while (result == false) {
-            if (turn.equals("Right")) {
-                compare = this.searchPosition(compare, dest);
-                if (compare == null) {
-                    break;
-                }
-                result = compare.equals(dest) ? true : false;
-            } else if (turn.equals("Left")) {
-                compare = this.searchPosition(compare, dest);
-                if (compare == null) {
-                    break;
-                }
-                result = compare.equals(dest) ? true : false;
-            } else {
-                break;
-            }
-        }
-        return result;
+        int firstDifference = source.y - dest.y;
+        int secondDifference = dest.x - source.x;
+        return firstDifference == secondDifference ? true : false;
     }
 
     /**

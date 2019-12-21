@@ -61,8 +61,8 @@ public class BishopBlackTest {
 
     @Test
     public void isDiagonalFalseTest() {
-        Cell source = Cell.C1;
-        Cell dest = Cell.G7;
+        Cell source = Cell.D8;
+        Cell dest = Cell.F7;
         boolean out = new BishopBlack(Cell.A1).isDiagonal(source, dest);
         Assert.assertFalse(out);
     }

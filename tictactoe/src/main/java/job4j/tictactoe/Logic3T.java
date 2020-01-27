@@ -51,7 +51,15 @@ public class Logic3T {
      */
     public boolean hasCombination(char figure) {
         List<Boolean> conditions = List.of(Arrays.stream(this.table)
-                .anyMatch(e -> Stream.of(e).allMatch(i -> figure == 'x' ? i.hasMarkX() : i.hasMarkO())));
+                        .anyMatch(e -> Stream.of(e)
+                                .allMatch(i -> figure == 'x' ? i.hasMarkX() : i.hasMarkO())),
+                Arrays.stream(this.table)
+                        .flatMap(e -> {
+                            int firstCount = 0;
+                            int secondCount = 0;
+                            // создать через флетмап массив со стримом
+                        })
+
 
         return true;
     }

@@ -1,6 +1,7 @@
 package job4j.tictactoe;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -30,7 +31,7 @@ public class Logic3T {
      * @return - true or false
      */
     public boolean isWinnerO() {
-        return false;
+        return hasCombination('o');
     }
 
     /**
@@ -53,14 +54,40 @@ public class Logic3T {
         List<Boolean> conditions = List.of(Arrays.stream(this.table)
                         .anyMatch(e -> Stream.of(e)
                                 .allMatch(i -> figure == 'x' ? i.hasMarkX() : i.hasMarkO())),
-                Arrays.stream(this.table)
-                        .flatMap(e -> {
-                            int firstCount = 0;
-                            int secondCount = 0;
-                            // создать через флетмап массив со стримом
-                        })
+                Arrays.stream(tableChanger("vertical"))
+                        .anyMatch(e -> Stream.of(e)
+                                .allMatch(i -> figure == 'x' ? i.hasMarkX() : i.hasMarkO())),
+                Arrays.stream(tableChanger("diagonal"))
+                        .anyMatch(e -> Stream.of(e)
+                                .allMatch(i -> figure == 'x' ? i.hasMarkX() : i.hasMarkO())));
+        return conditions.contains(true) ? true : false;
+    }
 
-
-        return true;
+    /**
+     * Method is an addon for hasCombination method
+     * He realizes operations of changes table on "vertical" or "diagonal"
+     *
+     * @param var - "vertical" or "diagonal"
+     * @return - specific array of parametres
+     */
+    private Figure3T[][] tableChanger(String var) {
+        Figure3T[][] result = new Figure3T[this.table.length][this.table.length];
+        if (var.equals("vertical")) {
+            for (int i = 0; i < this.table.length; i++) {
+                for (int j = 0; j < this.table.length; j++) {
+                    result[i][j] = this.table[j][i];
+                }
+            }
+        } else if (var.equals("diagonal")) {
+            return new Figure3T[][]{{this.table[0][0],
+                    this.table[1][1],
+                    this.table[2][2]},
+                    {this.table[2][0],
+                            this.table[1][1],
+                            this.table[0][2]}};
+        } else {
+            throw new IllegalArgumentException("Uncorrect parametres");
+        }
+        return result;
     }
 }
